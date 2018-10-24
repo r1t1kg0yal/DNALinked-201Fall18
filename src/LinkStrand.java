@@ -82,8 +82,8 @@ public class LinkStrand implements IDnaStrand {
 		
 		LinkStrand reversed = new LinkStrand();
 		
-		reversed.myLast = this.myFirst;
-		reversed.myFirst = this.myFirst;
+		reversed.myFirst.info = this.myFirst.info;
+		reversed.myLast.info = this.myFirst.info;
 		
 		Node first = this.myFirst;
 		
@@ -94,8 +94,8 @@ public class LinkStrand implements IDnaStrand {
 			StringBuilder sb = new StringBuilder(myFirst.info);
 			sb = sb.reverse();
 			String s = sb.toString();
-			
 			Node temp = new Node(s);
+			
 			temp.next = reversed.myFirst;
 			reversed.myFirst = temp;
 			

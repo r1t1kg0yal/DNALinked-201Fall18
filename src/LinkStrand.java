@@ -1,4 +1,4 @@
-
+ 
 public class LinkStrand implements IDnaStrand {
 	
 	private class Node {
@@ -118,7 +118,9 @@ public class LinkStrand implements IDnaStrand {
 	@Override
 	public char charAt(int index) {
 		
-		Node list = myFirst;
+		Node list = myCurrent;
+		
+		
 		
 		while (myIndex != index) {
 			

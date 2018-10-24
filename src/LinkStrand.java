@@ -45,8 +45,15 @@ public class LinkStrand implements IDnaStrand {
 	public void initialize(String source) {
 		
 		Node node = new Node(source);
-		myFirst = node;
+		
+		Node first = node;
+		
+		while(node!=null)
+			node = node.next;
+		
+		myFirst = first;
 		myLast = node;
+		
 		
 		mySize = node.info.length();
 		myAppends = 0;
@@ -68,6 +75,13 @@ public class LinkStrand implements IDnaStrand {
 
 		Node node = new Node(dna);
 		
+		Node first = myFirst;
+		
+		while(myFirst!=null)
+			myFirst = myFirst.next;
+		
+		myFirst.next = node;
+		myFirst = first;
 		myLast = node;
 		
 		mySize += node.info.length();

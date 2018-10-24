@@ -2,11 +2,15 @@
 public class LinkStrand implements IDnaStrand {
 	
 	private class Node {
-	   	String info;
+		
+		String info;
 	   	Node next;
+	   
 	   	public Node(String s) {
-	      	info = s;
+	      	
+	   		info = s;
 	      	next = null;
+	   
 	   	}
 	}
 	
@@ -14,6 +18,10 @@ public class LinkStrand implements IDnaStrand {
 	private Node myLast;
 	private long mySize;
 	private int myAppends;
+	
+	private int myIndex;
+	private int myLocalIndex;
+	private Node myCurrent;
 
 	public LinkStrand() {
 		
@@ -43,6 +51,9 @@ public class LinkStrand implements IDnaStrand {
 		mySize = node.info.length();
 		myAppends = 0;
 		
+		myIndex = 0;
+		myLocalIndex = 0;
+		myCurrent = myFirst;
 	}
 
 	@Override
@@ -54,13 +65,46 @@ public class LinkStrand implements IDnaStrand {
 	@Override
 	public IDnaStrand append(String dna) {
 
-		return null;
+		Node node = new Node(dna);
+		
+		myLast = node;
+		
+		mySize += node.info.length();
+		myAppends++;
+		
+		return this;
+		
 	}
 
 	@Override
 	public IDnaStrand reverse() {
-
-		return null;
+		
+		LinkStrand reversed = new LinkStrand();
+		
+		reversed.myLast = this.myFirst;
+		reversed.myFirst = this.myFirst;
+		
+		Node first = this.myFirst;
+		
+		this.myFirst = this.myFirst.next;
+		
+		while(myFirst!=null) {
+			
+			StringBuilder sb = new StringBuilder(myFirst.info);
+			sb = sb.reverse();
+			String s = sb.toString();
+			
+			Node temp = new Node(s);
+			temp.next = reversed.myFirst;
+			reversed.myFirst = temp;
+			
+			myFirst = myFirst.next;
+			
+		}
+		
+		myFirst = first;
+		
+		return reversed;
 	}
 
 	@Override
@@ -71,10 +115,44 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	public char charAt(int index) {
-
-		return 0;
+		
+		Node list = myFirst;
+		
+		while (myIndex != index) {
+			
+			myIndex++;
+			myLocalIndex++;
+			if (myLocalIndex >= list.info.length()) {
+				
+				myLocalIndex = 0;
+				list = list.next;
+				
+			}
+			
+		}
+		
+		myCurrent = list;
+		
+        return list.info.charAt(myLocalIndex);
+		
 	}
 	
+	public String toString() {
 		
+		StringBuilder finalString = new StringBuilder();
+		
+		Node first = myFirst;
+		
+		while(myFirst!=null)
+		{
+			finalString.append(myFirst.info);
+			myFirst = myFirst.next;
+		}
+		
+		myFirst = first;
+		
+		return finalString.toString();
+		
+	}
 	
 }

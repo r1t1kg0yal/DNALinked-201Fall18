@@ -58,8 +58,9 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	public IDnaStrand getInstance(String source) {
-
-		return null;
+		
+		return new LinkStrand(source);
+		
 	}
 
 	@Override
@@ -110,7 +111,7 @@ public class LinkStrand implements IDnaStrand {
 	@Override
 	public int getAppendCount() {
 
-		return 0;
+		return myAppends;
 	}
 
 	@Override

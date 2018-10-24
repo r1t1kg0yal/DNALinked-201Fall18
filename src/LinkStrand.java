@@ -120,7 +120,12 @@ public class LinkStrand implements IDnaStrand {
 		
 		Node list = myCurrent;
 		
-		
+		if(index < myIndex)
+		{
+			myIndex = 0;
+			myLocalIndex = 0;
+			list = myFirst;
+		}
 		
 		while (myIndex != index) {
 			

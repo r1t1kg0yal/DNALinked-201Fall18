@@ -83,7 +83,7 @@ public class LinkStrand implements IDnaStrand {
 		LinkStrand reversed = new LinkStrand();
 		
 		reversed.myFirst.info = this.myFirst.info;
-		reversed.myLast.info = this.myFirst.info;
+		reversed.myLast = reversed.myFirst;
 		
 		Node first = this.myFirst;
 		

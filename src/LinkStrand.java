@@ -68,13 +68,13 @@ public class LinkStrand implements IDnaStrand {
 
 		Node node = new Node(dna);
 		
-		myLast = node;
+		myLast.next = node;
+		myLast = node; 
 		
-		mySize += node.info.length();
-		myAppends++;
+		mySize += dna.length(); 
+		myAppends++; 
 		
 		return this;
-		
 	}
 
 	@Override

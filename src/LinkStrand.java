@@ -82,12 +82,12 @@ public class LinkStrand implements IDnaStrand {
 		
 		LinkStrand reversed = new LinkStrand();
 		
-		reversed.myFirst.info = this.myFirst.info;
+		reversed.myFirst.info = myFirst.info;
 		reversed.myLast = reversed.myFirst;
 		
-		Node first = this.myFirst;
+		Node first = myFirst;
 		
-		this.myFirst = this.myFirst.next;
+		myFirst = myFirst.next;
 		
 		while(myFirst!=null) {
 			
@@ -106,6 +106,7 @@ public class LinkStrand implements IDnaStrand {
 		myFirst = first;
 		
 		return reversed;
+		
 	}
 
 	@Override

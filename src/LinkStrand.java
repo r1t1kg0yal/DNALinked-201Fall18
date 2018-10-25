@@ -88,6 +88,7 @@ public class LinkStrand implements IDnaStrand {
 		
 		reversed.myFirst.info = st;
 		reversed.myLast = reversed.myFirst;
+		reversed.myAppends++;
 		
 		Node first = myFirst;
 		
@@ -102,13 +103,15 @@ public class LinkStrand implements IDnaStrand {
 			
 			temp.next = reversed.myFirst;
 			reversed.myFirst = temp;
+			reversed.myAppends++;
 			
 			myFirst = myFirst.next;
 			
 		}
 		
 		myFirst = first;
-		
+		reversed.mySize = reversed.size();
+				
 		return reversed;
 		
 	}

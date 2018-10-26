@@ -1,9 +1,113 @@
-Your Name here
-Your NetID here
-Your Partner's name here (or erase)
-Your Partner's NetID here (or erase)
+Ritik Goyal
+rpg15
 
-Questions here will come from the assignment
-writeup. Be sure to copy paste questions and 
-your explanations before you push to GitHub and
-do that before uploading to Gradescope
+Results:
+
+STRINGSTRAND
+dna length = 4,639,221
+cutting at enzyme gaattc
+-----
+Class	                splicee	      recomb	time	appends
+-----
+StringStrand:	            256	      4,800,471	0.444	1290
+StringStrand:	            512	      4,965,591	0.440	1290
+StringStrand:	          1,024	      5,295,831	0.480	1290
+StringStrand:	          2,048	      5,956,311	0.593	1290
+StringStrand:	          4,096	      7,277,271	0.686	1290
+StringStrand:	          8,192	      9,919,191	1.008	1290
+StringStrand:	         16,384	     15,203,031	1.710	1290
+StringStrand:	         32,768	     25,770,711	3.290	1290
+StringStrand:	         65,536	     46,906,071	6.157	1290
+StringStrand:	        131,072	     89,176,791	12.072	1290
+StringStrand:	        262,144	    173,718,231	23.816	1290
+StringStrand:	        524,288	    342,801,111	45.755	1290
+StringStrand:	      1,048,576	    680,966,871	86.940	1290
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+
+STRINGBUILDERSTRAND
+dna length = 4,639,221
+cutting at enzyme gaattc
+-----
+Class	         		       splicee 		    recomb	time	appends
+-----
+StringBuilderStrand:	            256	      4,800,471	0.026	1290
+StringBuilderStrand:	            512	      4,965,591	0.018	1290
+StringBuilderStrand:	          1,024	      5,295,831	0.007	1290
+StringBuilderStrand:	          2,048	      5,956,311	0.008	1290
+StringBuilderStrand:	          4,096	      7,277,271	0.010	1290
+StringBuilderStrand:	          8,192	      9,919,191	0.009	1290
+StringBuilderStrand:	         16,384	     15,203,031	0.015	1290
+StringBuilderStrand:	         32,768	     25,770,711	0.026	1290
+StringBuilderStrand:	         65,536	     46,906,071	0.039	1290
+StringBuilderStrand:	        131,072	     89,176,791	0.097	1290
+StringBuilderStrand:	        262,144	    173,718,231	0.147	1290
+StringBuilderStrand:	        524,288	    342,801,111	0.268	1290
+StringBuilderStrand:	      1,048,576	    680,966,871	0.695	1290
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+
+LINKSTRAND
+dna length = 4,639,221
+cutting at enzyme gaattc
+-----
+Class	             splicee  	  recomb	time	appends
+-----
+LinkStrand:	            256	      4,800,471	0.025	1290
+LinkStrand:	            512	      4,965,591	0.019	1290
+LinkStrand:	          1,024	      5,295,831	0.004	1290
+LinkStrand:	          2,048	      5,956,311	0.003	1290
+LinkStrand:	          4,096	      7,277,271	0.003	1290
+LinkStrand:	          8,192	      9,919,191	0.005	1290
+LinkStrand:	         16,384	     15,203,031	0.004	1290
+LinkStrand:	         32,768	     25,770,711	0.004	1290
+LinkStrand:	         65,536	     46,906,071	0.005	1290
+LinkStrand:	        131,072	     89,176,791	0.004	1290
+LinkStrand:	        262,144	    173,718,231	0.004	1290
+LinkStrand:	        524,288	    342,801,111	0.004	1290
+LinkStrand:	      1,048,576	    680,966,871	0.003	1290
+LinkStrand:	      2,097,152	  1,357,298,391	0.004	1290
+LinkStrand:	      4,194,304	  2,709,961,431	0.006	1290
+LinkStrand:	      8,388,608	  5,415,287,511	0.003	1290
+LinkStrand:	     16,777,216	 10,825,939,671	0.003	1290
+LinkStrand:	     33,554,432	 21,647,243,991	0.004	1290
+LinkStrand:	     67,108,864	 43,289,852,631	0.003	1290
+LinkStrand:	    134,217,728	 86,575,069,911	0.005	1290
+LinkStrand:	    268,435,456	173,145,504,471	0.006	1290
+LinkStrand:	    536,870,912	346,286,373,591	0.004	1290
+LinkStrand:	  1,073,741,824	692,568,111,831	0.007	1290
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+
+
+Question 1: are the benchmark timings for StringStrand consistent
+with the explanation below that the time to execute cutAndSplice is O(b2S)? 
+
+Yes: The benchmark timings are consistent with an approximately O(b^2S) execution
+time, because in the given results, the splicee length increases exponentially,
+doubling each time, and the break number starts off not increasing by much and 
+then increasing exponentially as well. Given this, the beginning of the runtime
+values should be approximately constant, but quickly become exponential growth.
+They do abide by this, as the runtime readings ultimately are more than doubling
+for every reading.
+
+Question 2: are the benchmark timings for StringBuilderStrand consistent
+with the explanation below that the time to execute cutAndSplice is O(bS)? 
+
+Yes: The benchmark timings are consistent for StringBuilderStrand because as
+the splicee value increases, the runtime taken eventually also increases by the 
+same rate, since the splicee value is doubling the time also increases
+by the same rate, especially towards the end.
+
+Question 3: Explain why the time for LinkStrand does not change much at all
+over all the runs in the benchmark program. Explain why you think memory is
+exhausted at the specific strand size you see in your timings -- as compared
+to exhaustion for String and StringBuilder.
+
+Because the splicee now represents a series of nodes, inserting extra dna pieces
+does not require the rest of the splicee to shift over, saving that time. Additionally,
+each time the strand to be inserted is inserted, a new node is created that simply points
+to the first instance of that inserted strand. This is why the benchmark is able to
+produce so many more results for longer splicee lengths, in that the total space
+taken by the dna is significantly less. However, when the OutOfMemoryError is eventually
+produced, this means that the memory allocated to the program by the computer has 
+in fact run out of memory to continue to process the data in the text file.
+
+

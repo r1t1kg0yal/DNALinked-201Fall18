@@ -80,21 +80,22 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 Question 1: are the benchmark timings for StringStrand consistent
 with the explanation below that the time to execute cutAndSplice is O(b2S)? 
 
-Yes: The benchmark timings are consistent with an approximately O(b^2S) execution
-time, because in the given results, the splicee length increases exponentially,
-doubling each time, and the break number starts off not increasing by much and 
-then increasing exponentially as well. Given this, the beginning of the runtime
-values should be approximately constant, but quickly become exponential growth.
-They do abide by this, as the runtime readings ultimately are more than doubling
-for every reading.
+Yes, because in the benchmark tests, the b^2 value does not change,
+while the S value changes by doubling each instance. This is reflected
+in the runtime as the runtime eventually doubles as well. However,
+for the first few cases, the runtime does not exactly double 
+because the splicee length is small, thus allowing for great variability
+in the number of cut and splices. 
 
 Question 2: are the benchmark timings for StringBuilderStrand consistent
 with the explanation below that the time to execute cutAndSplice is O(bS)? 
 
-Yes: The benchmark timings are consistent for StringBuilderStrand because as
-the splicee value increases, the runtime taken eventually also increases by the 
-same rate, since the splicee value is doubling the time also increases
-by the same rate, especially towards the end.
+Yes, because in the benchmark tests, the b value is again constant,
+while the S value doubles in each instance. This results in the runtime
+taken eventually also increasing by the same rate, since the splicee 
+value is doubling the time also increases by the same rate. For the first
+several benchmark tests, the runtime again does not necessarily double
+due to the variability in the splicee strands.
 
 Question 3: Explain why the time for LinkStrand does not change much at all
 over all the runs in the benchmark program. Explain why you think memory is

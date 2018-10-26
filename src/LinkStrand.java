@@ -1,11 +1,20 @@
  
 public class LinkStrand implements IDnaStrand {
 	
+	/**
+	 * Create the Node class
+	 * for use in LinkStrand
+	 */
 	private class Node {
 		
 		String info;
 	   	Node next;
-	   
+	   	
+	   	/**
+	   	 * Construct a Node
+	   	 * @param s is a String 
+	   	 * containing info of Node
+	   	 */
 	   	public Node(String s) {
 	      	
 	   		info = s;
@@ -23,24 +32,47 @@ public class LinkStrand implements IDnaStrand {
 	private int myLocalIndex;
 	private Node myCurrent;
 
+	/**
+	 * Default constructor for a LinkStrand Object
+	 */
 	public LinkStrand() {
 		
 		this("");
 		
 	}
 	
+	/**
+	 * Create a LinkStrand object given info 
+	 * for a single Node in the strand, using
+	 * initialize method
+	 * @param s is info for the first/only Node
+	 */
 	public LinkStrand(String s) {
 		
 		initialize(s);
 		
 	}
 	
+	/**
+	 * Returns the number of elements/base-pairs/nucleotides in this strand.
+	 * @return the number of base-pairs in this strand
+	 */
 	@Override
 	public long size() {
 
 		return mySize;
 	}
 
+	/**
+	 * Initialize by copying DNA data from the string into this strand,
+	 * replacing any data that was stored. The parameter should contain only
+	 * valid DNA characters, no error checking is done by the this method.
+	 * MyFirst and myLast are set to the node with info of source, while
+	 * all index-related instance variables are set to first value in strand
+	 * 
+	 * @param source
+	 *            is the string used to initialize this strand
+	 */
 	@Override
 	public void initialize(String source) {
 		
@@ -55,7 +87,15 @@ public class LinkStrand implements IDnaStrand {
 		myLocalIndex = 0;
 		myCurrent = myFirst;
 	}
-
+	
+	/**
+	 * Return this object, useful to obtain
+	 * an object without knowing its type, e.g.,
+	 * calling dna.getInstance() returns an IDnaStrand
+	 * that will be the same concrete type as dna
+	 * @param source is data from which object constructed
+	 * @return a LinkStrand whose .toString() method will be source
+	 */
 	@Override
 	public IDnaStrand getInstance(String source) {
 		
@@ -64,6 +104,12 @@ public class LinkStrand implements IDnaStrand {
 	}
 
 	@Override
+	/**
+	 * Append dna to the end of this strand.
+	 * @param dna
+	 *            is the string appended to this strand
+	 * @return this strand after the data has been added
+	 */
 	public IDnaStrand append(String dna) {
 
 		Node node = new Node(dna);
@@ -76,7 +122,13 @@ public class LinkStrand implements IDnaStrand {
 		
 		return this;
 	}
-
+	
+	/**
+	 * Returns an IDnaStrand that is the reverse of this strand, e.g., for
+	 * "CGAT" returns "TAGC"
+	 * 
+	 * @return reverse strand
+	 */
 	@Override
 	public IDnaStrand reverse() {
 		
@@ -114,13 +166,24 @@ public class LinkStrand implements IDnaStrand {
 		return reversed;
 		
 	}
-
+	
+	/**
+	 * Returns the number of times append has been called.
+	 * 
+	 * @return myAppends
+	 */
 	@Override
 	public int getAppendCount() {
 
 		return myAppends;
 	}
 
+	/**
+	 * Returns character at a specified index, where 0 <= index < size()
+	 * @param index specifies which character will be returned
+	 * @return the character at index
+	 * @throws IndexOutOfBoundsException if index < 0 or inde >= size()
+	 */
 	@Override
 	public char charAt(int index) {
 		
@@ -151,10 +214,16 @@ public class LinkStrand implements IDnaStrand {
 		
 		myCurrent = list;
 		
-        return list.info.charAt(myLocalIndex);
-		
+        return list.info.charAt(myLocalIndex);	
 	}
 	
+	/**
+	 * Returns a string representation of data
+	 * stored in this LinkStrand. Uses StringBuilder
+	 * class to easily manipulate data by adding
+	 * info in each Node to a single string.
+	 * @return String representation of strands combined
+	 */
 	public String toString() {
 		
 		StringBuilder finalString = new StringBuilder();
